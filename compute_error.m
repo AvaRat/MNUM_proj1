@@ -1,21 +1,37 @@
-function error = compute_error(A, B, result)
+function [ret] = compute_error(liczba_probek, skok, generator)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-    A_dims = size(A);
-    n_rows = A_dims(1);
-    n_cols = A_dims(2);
-    values_computed = zeros(n_rows);
-    for n=1 : n_rows
-        sum = 0;
-        for k=1: n_cols
-            sum  = sum + A(n, k) * result(k);
+errors = zeros(liczba_probek, 1);
+indexes = errors;
+disp('solving ...');
+    for n_rownan = 10 : skok : skok*liczba_probek
+        mat = generator(n_rownan);
+        A = mat(:, 1:n_rownan);
+        ground = mat(:, n_rownan+1);
+        results = gaussian_solver(mat);
+        A_dims = size(A);
+        n_rows = A_dims(1);
+        n_cols = A_dims(2);
+        values_computed = zeros(n_rows, 1);
+        for n=1 : n_rows
+            Sum = 0;
+            for k=1: n_cols
+                Sum  = Sum + A(n, k) * results(k);
+            end
+            values_computed(n) = Sum;
         end
-        values_computed(n) = sum;
+        differences = values_computed-ground;
+        pow_differences = differences.^2;
+        errors(n_rownan/skok) = sqrt(sum(pow_differences, 'all'));
+        indexes(n_rownan/skok) = n_rownan;
     end
-    diff_vec = abs(B - values_computed);
-    disp(diff_vec);
-    sqrt_diff_vec = pow2(diff_vec);
-    sum = sum(sqrt_diff_vec);
-    error = sqrt(sum);
+    disp('done');
+    ret = [errors indexes];
+ %   plot(indexes, errors);
+ %   xlabel('number of equations');
+ %   ylabel('error');
+ %   ax = gca;
+ %   ax.FontSize = 15;
+   
 end
 

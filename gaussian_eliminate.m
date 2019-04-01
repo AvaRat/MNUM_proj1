@@ -14,7 +14,7 @@ function [mat_L, mat_U, mat_B] = gaussian_eliminate(input)
         index_max = find(vec_k == max(abs(vec_k(row:n_rows))));
         if ~(index_max == k)
             %swap row 'i' with 'k'
-            disp("the greatest elem is at [" + col + " ,  " + index_max + " ] ");
+          %  disp("the greatest elem is at [" + col + " ,  " + index_max + " ] ");
             tmp = Mat(row , :);
             Mat(row , :) = Mat(index_max , :);
             Mat(index_max , :) = tmp;

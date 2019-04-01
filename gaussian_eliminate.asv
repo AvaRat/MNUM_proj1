@@ -1,4 +1,4 @@
-function [mat_L, mat_U, mat_B] = gaussian_eliminate(input)
+function [mat_L, mat_U] = gaussian_eliminate(input)
     Mat = input;
     A_dims = size(Mat);
     n_rows = A_dims(1);
@@ -25,12 +25,11 @@ function [mat_L, mat_U, mat_B] = gaussian_eliminate(input)
            Wn = Mat(n, col:n_cols);
            Wk = Mat(k, col:n_cols);
            Mat(n, col:n_cols) = Wn - L*Wk;
-           mat_L(n, k) = L;
+           mat_LU(n, k) = L;
         end   
       %  disp(Mat);
     end %end main for    
-    mat_U = Mat(:, 1:n_cols-1);
-    mat_B = Mat(:, n_cols);
+    mat = Mat;
 end %end function
 
 

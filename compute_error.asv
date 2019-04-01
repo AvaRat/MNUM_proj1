@@ -1,0 +1,18 @@
+function outputArg = compute_error(inputArg1, inputArg2)
+%UNTITLED3 Summary of this function goes here
+%   Detailed explanation goes here
+    Mat = inputArg1;
+    B = inputArg2;
+    A_dims = size(Mat);
+    n_rows = A_dims(1);
+    n_cols = A_dims(2);
+    values_computed = zeros(n_rows);
+    for n=1 : n_rows
+        sum = 0;
+        for k=1: n_cols
+            sum  = sum + Mat(n, k) * B(k);
+        end
+        values_computed(n) = sum;
+        en
+end
+

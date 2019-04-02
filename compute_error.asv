@@ -1,7 +1,10 @@
-function [errors, indexes, all_results] = compute_error(liczba_probek, skok, generator, algorithm)
+function [errors, indexes, results] = compute_error(liczba_probek, skok, generator, algorithm)
 %UNTITLED3 Summary of this function goes here
 %   Detailed explanation goes here
-all_results = zeros(skok*liczba_probek, liczba_probek);
+p = inputParser;
+paramName = 'check_equality';
+defaultVal = False;
+addParameter(p, paramName, defaultVal);
 errors = zeros(liczba_probek, 1);
 indexes = errors;
 disp('solving ...');
@@ -28,10 +31,6 @@ disp('solving ...');
         pow_differences = differences.^2;
         errors(n_rownan/skok) = sqrt(sum(pow_differences, 'all'));
         indexes(n_rownan/skok) = n_rownan;
-        
-        s = size(results);
-        s = (s);
-        all_results(1:s, n_rownan/skok) = results;
     end
     disp('done');
    

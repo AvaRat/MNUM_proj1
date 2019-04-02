@@ -11,9 +11,9 @@ function [] = compare_with_default(liczba_probek, skok, my_results)
     xlabel(ax2, 'number of equations');
     ylabel(ax2, 'error');
     title(ax2, 'Matlab built in algorithm');
-    legend(ax2, 'zestaw 1', 'zestaw 2', 'zestaw 3');
+    legend(ax2, 'zestaw 1', 'zestaw 2', 'zestaw 3 * 1e-18');
     ax2 = gca;
-    ax2.FontSize = 12;
+    ax2.FontSize = 10;
    
     myResultSet1 = my_results(:, 1 : liczba_probek);
     myResultSet2 = my_results(:, liczba_probek+1 : liczba_probek*2);
@@ -25,16 +25,15 @@ function [] = compare_with_default(liczba_probek, skok, my_results)
     differences3 = myResultSet3 - res3;
 
  %   differences = [differences1 differences2 differences3];
-    a = [mean(differences1); mean(differences2); mean(differences3)];
+    a = [std(differences1); std(differences2); std(differences3)/10.^36];
 
     ax3 = subplot(2, 2, 1);
     plot(ax3, indexes, a);
     xlabel(ax3, 'number of equations');
     ylabel(ax3, 'srednia roznica miedzy wynikami dwoch algorytmow');
     title(ax3, 'equality of two algorithms');
-    legend(ax3, 'zestaw 1', 'zestaw 2', 'zestaw 3');
+    legend(ax3, 'zestaw 1', 'zestaw 2', 'zestaw 3 * 1e-36');
     ax3 = gca;
     ax3.FontSize = 10;
-
 end
 

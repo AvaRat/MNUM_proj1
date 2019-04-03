@@ -5,13 +5,13 @@ function [] = compare_with_default(liczba_probek, skok, my_results)
     [err2, ~, res2] = compute_error(liczba_probek, skok, @generator_2, @matlab_solver);
     [err3, ~, res3] = compute_error(liczba_probek, skok, @generator_3, @matlab_solver);
     
-    errors = [err1 err2 err3/(10.^18)];
+    errors = err3;
     ax2 = subplot(2, 2, 2);
-    plot(ax2, indexes, errors);
+    plot(ax2, indexes, errors, 'black--.');
     xlabel(ax2, 'number of equations');
     ylabel(ax2, 'error');
+    legend(ax2, 'zestaw 2', 'Location','northwest');
     title(ax2, 'Matlab built in algorithm');
-    legend(ax2, 'zestaw 1', 'zestaw 2', 'zestaw 3 * 1e-18');
     ax2 = gca;
     ax2.FontSize = 10;
    
@@ -25,14 +25,14 @@ function [] = compare_with_default(liczba_probek, skok, my_results)
     differences3 = myResultSet3 - res3;
 
  %   differences = [differences1 differences2 differences3];
-    a = [std(differences1); std(differences2); std(differences3)/10.^36];
+    a = std(differences3);
 
     ax3 = subplot(2, 2, 1);
-    plot(ax3, indexes, a);
+    plot(ax3, indexes, a, 'black--.');
     xlabel(ax3, 'number of equations');
-    ylabel(ax3, 'srednia roznica miedzy wynikami dwoch algorytmow');
+    legend(ax3, 'zestaw 2', 'Location','northwest');
+    ylabel(ax3, 'odchylenie standardowe wyników');
     title(ax3, 'equality of two algorithms');
-    legend(ax3, 'zestaw 1', 'zestaw 2', 'zestaw 3 * 1e-36');
     ax3 = gca;
     ax3.FontSize = 10;
 end

@@ -8,11 +8,12 @@ function [my_results] = plot_all(liczba_probek)
     [err3, ~, res3] = compute_error(liczba_probek, skok, @generator_3, @gaussian_solver);
     
     
-    errors = [err1 err2 err3/(10.^19)];
-    ax1 = subplot(2, 2, [3,4]);
-    plot(ax1, indexes, errors);
+    errors = err3;
+    figure('Name','Zestaw 2','NumberTitle','off');
+    ax1 = subplot(2, 2, 3);
+    plot(ax1, indexes, errors, 'black--.');
+    legend(ax1, 'zestaw 3', 'Location','northwest');
     xlabel(ax1, 'number of equations');
-    legend(ax1, 'zestaw 1', 'zestaw 2', 'zestaw 3 *2e-19');
     ylabel(ax1, 'error');
     title(ax1, 'my algorithm');
     ax1 = gca;

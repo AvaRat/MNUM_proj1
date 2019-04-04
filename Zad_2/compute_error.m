@@ -4,6 +4,7 @@ function [errors, indexes, all_results] = compute_error(liczba_probek, skok, gen
 all_results = zeros(skok*liczba_probek, liczba_probek);
 errors = zeros(liczba_probek, 1);
 indexes = errors;
+tic;
 disp('solving ...');
     for n_rownan = 10 : skok : skok*liczba_probek
         mat = generator(n_rownan);
@@ -11,7 +12,6 @@ disp('solving ...');
         ground = mat(:, n_rownan+1);
         
         results = algorithm(mat);
-        %built in function for comparison purposes
         
         A_dims = size(A);
         n_rows = A_dims(1);
@@ -34,6 +34,7 @@ disp('solving ...');
         all_results(1:s, n_rownan/skok) = results;
     end
     disp('done');
+    toc;
    
 end
 

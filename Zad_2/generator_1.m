@@ -1,5 +1,4 @@
 
-
 function [mat]  = generator_1(n)
     A = zeros(n);       
     B = zeros(n, 1);    %Ax = B

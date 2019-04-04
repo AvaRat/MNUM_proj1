@@ -14,7 +14,7 @@ function [X] = Jacobi_solver(mat)
     prev_result = result;
     NB = N*B;
 
-    for x=1 : 100
+    for x=1 : 50
         %du?y for dla ka?dej zmiennej
         for k=1 : n_rows
             s = 0;
